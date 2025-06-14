@@ -203,16 +203,13 @@ const auth = {
 
     // Simular login (para demo)
     simulateLogin: async (email, password) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simular credenciales válidas
-                if (email === 'demo@sentrix.com' && password === 'Demo123') {
-                    resolve();
-                } else {
-                    reject(new Error('Credenciales inválidas'));
-                }
-            }, 1000);
-        });
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        if (email === 'demo@sentrix.com' && password === 'Demo123') {
+            localStorage.setItem('authToken', 'demo-token');
+            window.location.href = '/pages/home/home.html';
+        } else {
+            throw new Error("Credenciales incorrectas.");
+        }
     },
 
     // Simular registro (para demo)
