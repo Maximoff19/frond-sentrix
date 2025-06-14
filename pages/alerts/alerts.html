@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alertas - Sentrix">
+    <title>Alertas - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barra de navegación superior -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="../../logo.png" alt="Sentrix Logo" class="logo">
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-menu">
+                <span class="user-greeting">Hola, <span id="userName">Usuario</span></span>
+                <button class="btn btn-icon" id="userMenuButton" aria-label="Menú de usuario">
+                    <i class="ri-user-line"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="../settings/settings.html" class="dropdown-item">
+                        <i class="ri-settings-3-line"></i>
+                        Configuración
+                    </a>
+                    <button class="dropdown-item" data-action="logout">
+                        <i class="ri-logout-box-line"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="../home/home.html" class="nav-item">
+                    <i class="ri-home-line"></i>
+                    Inicio
+                </a>
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <i class="ri-dashboard-line"></i>
+                    Dashboard
+                </a>
+                <a href="../management/personnel.html" class="nav-item">
+                    <i class="ri-user-settings-line"></i>
+                    Personal
+                </a>
+                <a href="../reports/reports.html" class="nav-item">
+                    <i class="ri-file-chart-line"></i>
+                    Reportes
+                </a>
+                <a href="alerts.html" class="nav-item active">
+                    <i class="ri-alarm-warning-line"></i>
+                    Alertas
+                </a>
+                <a href="../zones/zones.html" class="nav-item">
+                    <i class="ri-map-pin-line"></i>
+                    Zonas
+                </a>
+                <a href="../settings/settings.html" class="nav-item">
+                    <i class="ri-settings-3-line"></i>
+                    Configuración
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <h2>Alertas</h2>
+                    <p class="header-subtitle">Monitoreo y gestión de alertas del sistema</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="refreshAlerts">
+                        <i class="ri-refresh-line"></i>
+                        Actualizar Alertas
+                    </button>
+                </div>
+            </header>
+
+            <!-- Resumen de alertas -->
+            <section class="alerts-summary">
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-icon alert-icon">
+                            <i class="ri-alarm-warning-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="totalAlerts">0</span>
+                            <span class="summary-label">Total de Alertas</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon alert-icon alta">
+                            <i class="ri-error-warning-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="highAlerts">0</span>
+                            <span class="summary-label">Alertas Altas</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon alert-icon media">
+                            <i class="ri-alert-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="mediumAlerts">0</span>
+                            <span class="summary-label">Alertas Medias</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon alert-icon baja">
+                            <i class="ri-information-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="lowAlerts">0</span>
+                            <span class="summary-label">Alertas Bajas</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filtros -->
+            <section class="filters-section">
+                <div class="filter-group">
+                    <label for="alertType">Tipo de Alerta</label>
+                    <select id="alertType" class="form-select">
+                        <option value="all">Todos los tipos</option>
+                        <option value="acceso">Acceso</option>
+                        <option value="presencia">Presencia</option>
+                        <option value="sistema">Sistema</option>
+                        <option value="zona">Zona</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="alertSeverity">Severidad</label>
+                    <select id="alertSeverity" class="form-select">
+                        <option value="all">Todas</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="alertStatus">Estado</label>
+                    <select id="alertStatus" class="form-select">
+                        <option value="all">Todos</option>
+                        <option value="activa">Activa</option>
+                        <option value="resuelta">Resuelta</option>
+                        <option value="pendiente">Pendiente</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchAlert">Buscar</label>
+                    <div class="search-box">
+                        <input type="text" id="searchAlert" placeholder="Buscar alertas...">
+                        <i class="ri-search-line"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alertas Activas -->
+            <section class="alerts-section">
+                <div class="section-header">
+                    <h3>Alertas Activas</h3>
+                    <div class="section-actions">
+                        <button class="btn btn-icon" id="exportAlerts" title="Exportar">
+                            <i class="ri-download-line"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="alerts-grid" id="activeAlertsList">
+                    <!-- Las alertas activas se cargarán dinámicamente -->
+                </div>
+            </section>
+
+            <!-- Historial de Alertas -->
+            <section class="alerts-history">
+                <div class="section-header">
+                    <h3>Historial de Alertas</h3>
+                    <button class="btn btn-text" id="viewAllAlerts">
+                        Ver todo el historial
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
+                </div>
+                <div class="alerts-table-container">
+                    <table class="alerts-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Mensaje</th>
+                                <th>Severidad</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alertsHistoryList">
+                            <!-- El historial de alertas se cargará dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de detalles de alerta -->
+    <div class="modal" id="alertModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detalles de la Alerta</h3>
+                <button class="modal-close" id="closeAlertModal">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="alertDetails">
+                <!-- Los detalles de la alerta se cargarán dinámicamente -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closeAlert">Cerrar Alerta</button>
+                <button class="btn btn-primary" id="resolveAlert">Resolver</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/alerts.js"></script>
+</body>
+</html> 

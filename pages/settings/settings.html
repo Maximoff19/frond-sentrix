@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configuración - Sentrix">
+    <title>Configuración - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barra de navegación superior -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="../../assets/img/sensinova-logo.svg" alt="SensiNova Logo" class="logo">
+                <h1>Sentrix</h1>
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-menu">
+                <span class="user-greeting">Hola, <span id="userName">Usuario</span></span>
+                <button class="btn btn-icon" id="userMenuButton" aria-label="Menú de usuario">
+                    <i class="ri-user-line"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="profile.html" class="dropdown-item">
+                        <i class="ri-settings-3-line"></i>
+                        Configuración
+                    </a>
+                    <button class="dropdown-item" data-action="logout">
+                        <i class="ri-logout-box-line"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="../home/home.html" class="nav-item">
+                    <i class="ri-home-line"></i>
+                    Inicio
+                </a>
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <i class="ri-dashboard-line"></i>
+                    Dashboard
+                </a>
+                <a href="../management/personnel.html" class="nav-item">
+                    <i class="ri-user-settings-line"></i>
+                    Personal
+                </a>
+                <a href="../reports/reports.html" class="nav-item">
+                    <i class="ri-file-chart-line"></i>
+                    Reportes
+                </a>
+                <a href="../alerts/alerts.html" class="nav-item">
+                    <i class="ri-alarm-warning-line"></i>
+                    Alertas
+                </a>
+                <a href="../zones/zones.html" class="nav-item">
+                    <i class="ri-map-pin-line"></i>
+                    Zonas
+                </a>
+                <a href="settings.html" class="nav-item active">
+                    <i class="ri-settings-3-line"></i>
+                    Configuración
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <h2>Configuración</h2>
+            </header>
+
+            <!-- Secciones de configuración -->
+            <div class="settings-sections">
+                <!-- Perfil de Usuario -->
+                <section class="settings-section">
+                    <h3>Perfil de Usuario</h3>
+                    <form id="profileForm" class="settings-form">
+                        <div class="form-group">
+                            <label for="userName">Nombre</label>
+                            <input type="text" id="userName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Correo Electrónico</label>
+                            <input type="email" id="userEmail" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userRole">Rol</label>
+                            <select id="userRole" class="form-select" disabled>
+                                <option value="admin">Administrador</option>
+                                <option value="manager">Gerente</option>
+                                <option value="user">Usuario</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </section>
+
+                <!-- Preferencias -->
+                <section class="settings-section">
+                    <h3>Preferencias</h3>
+                    <form id="preferencesForm" class="settings-form">
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="notificationsEnabled">
+                                Recibir notificaciones
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoRefreshEnabled">
+                                Actualización automática
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="refreshInterval">Intervalo de actualización</label>
+                            <select id="refreshInterval" class="form-select">
+                                <option value="30">30 segundos</option>
+                                <option value="60">1 minuto</option>
+                                <option value="300">5 minutos</option>
+                                <option value="600">10 minutos</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Preferencias</button>
+                    </form>
+                </section>
+
+                <!-- Seguridad -->
+                <section class="settings-section">
+                    <h3>Seguridad</h3>
+                    <form id="securityForm" class="settings-form">
+                        <div class="form-group">
+                            <label for="currentPassword">Contraseña Actual</label>
+                            <input type="password" id="currentPassword" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Nueva Contraseña</label>
+                            <input type="password" id="newPassword" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Contraseña</label>
+                            <input type="password" id="confirmPassword" class="form-input" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/settings.js"></script>
+</body>
+</html> 

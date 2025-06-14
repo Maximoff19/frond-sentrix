@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zonas - Sentrix">
+    <title>Zonas - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barra de navegación superior -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="../../logo.png" alt="Sentrix Logo" class="logo">
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-menu">
+                <span class="user-greeting">Hola, <span id="userName">Usuario</span></span>
+                <button class="btn btn-icon" id="userMenuButton" aria-label="Menú de usuario">
+                    <i class="ri-user-line"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="../settings/settings.html" class="dropdown-item">
+                        <i class="ri-settings-3-line"></i>
+                        Configuración
+                    </a>
+                    <button class="dropdown-item" data-action="logout">
+                        <i class="ri-logout-box-line"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="../home/home.html" class="nav-item">
+                    <i class="ri-home-line"></i>
+                    Inicio
+                </a>
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <i class="ri-dashboard-line"></i>
+                    Dashboard
+                </a>
+                <a href="../management/personnel.html" class="nav-item">
+                    <i class="ri-user-settings-line"></i>
+                    Personal
+                </a>
+                <a href="../reports/reports.html" class="nav-item">
+                    <i class="ri-file-chart-line"></i>
+                    Reportes
+                </a>
+                <a href="../alerts/alerts.html" class="nav-item">
+                    <i class="ri-alarm-warning-line"></i>
+                    Alertas
+                </a>
+                <a href="zones.html" class="nav-item active">
+                    <i class="ri-map-pin-line"></i>
+                    Zonas
+                </a>
+                <a href="../settings/settings.html" class="nav-item">
+                    <i class="ri-settings-3-line"></i>
+                    Configuración
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <h2>Zonas</h2>
+                    <p class="header-subtitle">Gestión y monitoreo de zonas de acceso</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addZoneBtn">
+                        <i class="ri-add-line"></i>
+                        Nueva Zona
+                    </button>
+                    <button class="btn btn-secondary" id="refreshZonesBtn">
+                        <i class="ri-refresh-line"></i>
+                        Actualizar
+                    </button>
+                </div>
+            </header>
+
+            <!-- Resumen de zonas -->
+            <section class="zones-summary">
+                <div class="summary-card">
+                    <h3>Total Zonas</h3>
+                    <p class="value" id="totalZones">0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Zonas Activas</h3>
+                    <p class="value" id="activeZones">0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Zonas Restringidas</h3>
+                    <p class="value" id="restrictedZones">0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Ocupación Promedio</h3>
+                    <p class="value" id="avgOccupancy">0%</p>
+                </div>
+            </section>
+
+            <!-- Filtros -->
+            <div class="zones-filters">
+                <div class="filter-group">
+                    <label for="zoneType">Tipo de Zona</label>
+                    <select id="zoneType" class="filter-select">
+                        <option value="">Todos</option>
+                        <option value="acceso">Acceso</option>
+                        <option value="restriccion">Restricción</option>
+                        <option value="monitoreo">Monitoreo</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="zoneStatus">Estado</label>
+                    <select id="zoneStatus" class="filter-select">
+                        <option value="">Todos</option>
+                        <option value="activa">Activa</option>
+                        <option value="inactiva">Inactiva</option>
+                        <option value="mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="occupancyLevel">Nivel de Ocupación</label>
+                    <select id="occupancyLevel" class="filter-select">
+                        <option value="">Todos</option>
+                        <option value="bajo">Bajo (< 30%)</option>
+                        <option value="medio">Medio (30-70%)</option>
+                        <option value="alto">Alto (> 70%)</option>
+                    </select>
+                </div>
+                <div class="filter-group search-box">
+                    <input type="text" id="zoneSearch" placeholder="Buscar zona...">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+
+            <!-- Lista de Zonas -->
+            <div class="zones-list">
+                <table class="zones-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Ocupación</th>
+                            <th>Última Actualización</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="zonesTableBody">
+                        <!-- Las zonas se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de zona -->
+    <div class="modal" id="zoneModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Detalles de Zona</h3>
+                <button class="modal-close" id="closeZoneModal">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="zoneDetails">
+                <!-- Los detalles se cargarán dinámicamente -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closeZoneBtn">Cerrar</button>
+                <button class="btn btn-primary" id="saveZoneBtn">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/zones.js"></script>
+</body>
+</html> 

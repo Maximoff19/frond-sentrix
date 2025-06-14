@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard - Sentrix">
+    <title>Dashboard - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barra de navegación superior -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="../../logo.png" alt="Sentrix Logo" class="logo">
+                <h1>Sentrix</h1>
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-menu">
+                <span class="user-greeting">Hola, <span id="userName">Usuario</span></span>
+                <button class="btn btn-icon" id="userMenuButton" aria-label="Menú de usuario">
+                    <i class="ri-user-line"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="../settings/profile.html" class="dropdown-item">
+                        <i class="ri-settings-3-line"></i>
+                        Configuración
+                    </a>
+                    <button class="dropdown-item" data-action="logout">
+                        <i class="ri-logout-box-line"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="../home/home.html" class="nav-item">
+                    <i class="ri-home-line"></i>
+                    Inicio
+                </a>
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="ri-dashboard-line"></i>
+                    Dashboard
+                </a>
+                <a href="../management/personnel.html" class="nav-item">
+                    <i class="ri-user-settings-line"></i>
+                    Personal
+                </a>
+                <a href="../reports/reports.html" class="nav-item">
+                    <i class="ri-file-chart-line"></i>
+                    Reportes
+                </a>
+                <a href="../alerts/alerts.html" class="nav-item">
+                    <i class="ri-alarm-warning-line"></i>
+                    Alertas
+                </a>
+                <a href="../zones/zones.html" class="nav-item">
+                    <i class="ri-map-pin-line"></i>
+                    Zonas
+                </a>
+                <a href="../settings/settings.html" class="nav-item">
+                    <i class="ri-settings-3-line"></i>
+                    Configuración
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <h2>Dashboard</h2>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshButton">
+                        <i class="ri-refresh-line"></i>
+                        Actualizar
+                    </button>
+                </div>
+            </header>
+
+            <!-- Tarjetas de resumen -->
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Personal Presente</h3>
+                        <i class="ri-user-line card-icon"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-value" id="presentWorkers">0</div>
+                        <div class="card-label">Trabajadores</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Alertas Activas</h3>
+                        <i class="ri-alarm-warning-line card-icon"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-value" id="activeAlerts">0</div>
+                        <div class="card-label">Alertas</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Ocupación Actual</h3>
+                        <i class="ri-building-line card-icon"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-value" id="occupancyRate">0%</div>
+                        <div class="card-label">Tasa de Ocupación</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secciones de monitoreo -->
+            <div class="dashboard-sections">
+                <!-- Monitoreo en tiempo real -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Monitoreo en Tiempo Real</h3>
+                        <div class="section-actions">
+                            <select class="form-select" id="zoneFilter">
+                                <option value="all">Todas las zonas</option>
+                                <option value="a">Zona A</option>
+                                <option value="b">Zona B</option>
+                                <option value="c">Zona C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="monitoring-grid">
+                        <div class="monitoring-card">
+                            <h4>Personal Presente</h4>
+                            <div class="worker-list" id="presentWorkersList">
+                                <!-- Lista de trabajadores se cargará dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="monitoring-card">
+                            <h4>Mapa de Ocupación</h4>
+                            <div class="occupancy-map" id="occupancyMap">
+                                <!-- Mapa se cargará dinámicamente -->
+                                <p class="empty-state">
+                                    <i class="ri-map-pin-line"></i>
+                                    <p>Cargando mapa de ocupación...</p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Alertas recientes -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Alertas Recientes</h3>
+                        <div class="section-actions">
+                            <a href="../alerts/alerts.html" class="btn btn-secondary">
+                                Ver todas
+                            </a>
+                        </div>
+                    </div>
+                    <div class="alerts-list" id="recentAlerts">
+                        <!-- Alertas se cargarán dinámicamente -->
+                    </div>
+                </section>
+
+                <!-- Resumen diario -->
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Resumen Diario</h3>
+                        <div class="section-actions">
+                            <button class="btn btn-secondary" id="downloadReport">
+                                <i class="ri-download-line"></i>
+                                Descargar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="daily-summary" id="dailySummary">
+                        <!-- Resumen se cargará dinámicamente -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/mockData.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+</body>
+</html> 

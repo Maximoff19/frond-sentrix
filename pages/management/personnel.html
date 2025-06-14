@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestión de Personal - Sentrix">
+    <title>Gestión de Personal - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barra de navegación superior -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="../../logo.png" alt="Sentrix Logo" class="logo">
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-menu">
+                <span class="user-greeting">Hola, <span id="userName">Usuario</span></span>
+                <button class="btn btn-icon" id="userMenuButton" aria-label="Menú de usuario">
+                    <i class="ri-user-line"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="settings.html" class="dropdown-item">
+                        <i class="ri-settings-3-line"></i>
+                        Configuración
+                    </a>
+                    <button class="dropdown-item" data-action="logout">
+                        <i class="ri-logout-box-line"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="../home/home.html" class="nav-item">
+                    <i class="ri-home-line"></i>
+                    Inicio
+                </a>
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <i class="ri-dashboard-line"></i>
+                    Dashboard
+                </a>
+                <a href="personnel.html" class="nav-item active">
+                    <i class="ri-user-settings-line"></i>
+                    Personal
+                </a>
+                <a href="../reports/reports.html" class="nav-item">
+                    <i class="ri-file-chart-line"></i>
+                    Reportes
+                </a>
+                <a href="../alerts/alerts.html" class="nav-item">
+                    <i class="ri-alarm-warning-line"></i>
+                    Alertas
+                </a>
+                <a href="../zones/zones.html" class="nav-item">
+                    <i class="ri-map-pin-line"></i>
+                    Zonas
+                </a>
+                <a href="../settings/settings.html" class="nav-item">
+                    <i class="ri-settings-3-line"></i>
+                    Configuración
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <h2>Gestión de Personal</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addWorkerBtn">
+                        <i class="ri-user-add-line"></i>
+                        Agregar Trabajador
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filtros y búsqueda -->
+            <div class="filter-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchWorker" 
+                        placeholder="Buscar por nombre o ID..."
+                        class="form-input"
+                    >
+                    <i class="ri-search-line"></i>
+                </div>
+                <div class="filter-group">
+                    <select id="departmentFilter" class="form-select">
+                        <option value="all">Todos los departamentos</option>
+                        <option value="admin">Administración</option>
+                        <option value="prod">Producción</option>
+                        <option value="mant">Mantenimiento</option>
+                    </select>
+                    <select id="statusFilter" class="form-select">
+                        <option value="all">Todos los estados</option>
+                        <option value="active">Activo</option>
+                        <option value="inactive">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lista de trabajadores -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Departamento</th>
+                            <th>Estado</th>
+                            <th>Último Acceso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="workersTableBody">
+                        <!-- Los datos se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination">
+                <button class="btn btn-secondary" id="prevPage" disabled>
+                    <i class="ri-arrow-left-s-line"></i>
+                    Anterior
+                </button>
+                <span class="page-info">Página <span id="currentPage">1</span> de <span id="totalPages">1</span></span>
+                <button class="btn btn-secondary" id="nextPage" disabled>
+                    Siguiente
+                    <i class="ri-arrow-right-s-line"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para agregar/editar trabajador -->
+    <div class="modal" id="workerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Agregar Trabajador</h3>
+                <button class="btn btn-icon modal-close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <form id="workerForm" class="modal-body">
+                <input type="hidden" id="workerId">
+                <div class="form-group">
+                    <label for="workerName">Nombre Completo</label>
+                    <input type="text" id="workerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="workerEmail">Correo Electrónico</label>
+                    <input type="email" id="workerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="workerDepartment">Departamento</label>
+                    <select id="workerDepartment" required>
+                        <option value="admin">Administración</option>
+                        <option value="prod">Producción</option>
+                        <option value="mant">Mantenimiento</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="workerPosition">Cargo</label>
+                    <input type="text" id="workerPosition" required>
+                </div>
+                <div class="form-group">
+                    <label for="workerSchedule">Horario</label>
+                    <select id="workerSchedule" required>
+                        <option value="morning">Mañana (6:00 - 14:00)</option>
+                        <option value="afternoon">Tarde (14:00 - 22:00)</option>
+                        <option value="night">Noche (22:00 - 6:00)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="workerAccess">Nivel de Acceso</label>
+                    <select id="workerAccess" required>
+                        <option value="basic">Básico</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary modal-cancel">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Acción</h3>
+                <button class="btn btn-icon modal-close">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">¿Estás seguro de que deseas realizar esta acción?</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary modal-cancel">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmAction">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/personnel.js"></script>
+</body>
+</html> 

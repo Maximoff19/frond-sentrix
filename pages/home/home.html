@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inicio - Sentrix">
+    <title>Inicio - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body data-requires-auth="true">
+    <!-- Barra de navegación superior -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo-container">
+                <img src="../../logo.png" alt="Sentrix Logo" class="logo">
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <div class="user-menu">
+                <span class="user-greeting">Hola, <span id="userName">Usuario</span></span>
+                <button class="btn btn-icon" id="userMenuButton" aria-label="Menú de usuario">
+                    <i class="ri-user-line"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdown">
+                    <a href="../settings/settings.html" class="dropdown-item">
+                        <i class="ri-settings-3-line"></i>
+                        Configuración
+                    </a>
+                    <button class="dropdown-item" data-action="logout">
+                        <i class="ri-logout-box-line"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="home.html" class="nav-item active">
+                    <i class="ri-home-line"></i>
+                    Inicio
+                </a>
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <i class="ri-dashboard-line"></i>
+                    Dashboard
+                </a>
+                <a href="../management/personnel.html" class="nav-item">
+                    <i class="ri-user-settings-line"></i>
+                    Personal
+                </a>
+                <a href="../reports/reports.html" class="nav-item">
+                    <i class="ri-file-chart-line"></i>
+                    Reportes
+                </a>
+                <a href="../alerts/alerts.html" class="nav-item">
+                    <i class="ri-alarm-warning-line"></i>
+                    Alertas
+                </a>
+                <a href="../zones/zones.html" class="nav-item">
+                    <i class="ri-map-pin-line"></i>
+                    Zonas
+                </a>
+                <a href="../settings/settings.html" class="nav-item">
+                    <i class="ri-settings-3-line"></i>
+                    Configuración
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <h2>Bienvenido a Sentrix</h2>
+                    <p class="header-subtitle">Sistema de Monitoreo de Personal</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshData">
+                        <i class="ri-refresh-line"></i>
+                        Actualizar
+                    </button>
+                </div>
+            </header>
+
+            <!-- Resumen rápido -->
+            <section class="quick-summary">
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="totalWorkers">0</span>
+                            <span class="summary-label">Personal Total</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="ri-user-follow-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="activeWorkers">0</span>
+                            <span class="summary-label">Personal Activo</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="ri-alarm-warning-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="activeAlerts">0</span>
+                            <span class="summary-label">Alertas Activas</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="ri-map-pin-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <span class="summary-value" id="activeZones">0</span>
+                            <span class="summary-label">Zonas Activas</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secciones principales -->
+            <div class="home-sections">
+                <!-- Monitoreo y Personal -->
+                <section class="home-section">
+                    <h3>Monitoreo y Personal</h3>
+                    <div class="features-grid">
+                        <a href="../dashboard/dashboard.html" class="feature-card">
+                            <div class="feature-icon">
+                                <i class="ri-dashboard-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Monitoreo en Tiempo Real</h4>
+                                <p>Visualiza la ubicación y estado actual de todo el personal</p>
+                                <span class="feature-status" data-status="active">Operativo</span>
+                            </div>
+                        </a>
+
+                        <a href="../management/personnel.html" class="feature-card">
+                            <div class="feature-icon">
+                                <i class="ri-user-settings-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Gestión de Personal</h4>
+                                <p>Administra trabajadores, horarios y permisos</p>
+                                <span class="feature-status" data-status="active">Activo</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Reportes y Alertas -->
+                <section class="home-section">
+                    <h3>Reportes y Alertas</h3>
+                    <div class="features-grid">
+                        <a href="../reports/reports.html" class="feature-card">
+                            <div class="feature-icon">
+                                <i class="ri-file-chart-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Reportes</h4>
+                                <p>Genera informes de asistencia y actividad</p>
+                                <span class="feature-status" data-status="active">Disponible</span>
+                            </div>
+                        </a>
+
+                        <a href="../alerts/alerts.html" class="feature-card">
+                            <div class="feature-icon">
+                                <i class="ri-alarm-warning-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Alertas</h4>
+                                <p>Gestiona y responde a alertas de seguridad</p>
+                                <span class="feature-status" data-status="alert">2 Alertas Activas</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Zonas y Configuración -->
+                <section class="home-section">
+                    <h3>Zonas y Configuración</h3>
+                    <div class="features-grid">
+                        <a href="../zones/zones.html" class="feature-card">
+                            <div class="feature-icon">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Zonas</h4>
+                                <p>Configura y gestiona zonas de acceso</p>
+                                <span class="feature-status" data-status="active">8 Zonas Configuradas</span>
+                            </div>
+                        </a>
+
+                        <a href="../settings/settings.html" class="feature-card">
+                            <div class="feature-icon">
+                                <i class="ri-settings-3-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Configuración</h4>
+                                <p>Ajusta parámetros del sistema y preferencias</p>
+                                <span class="feature-status" data-status="active">Personalizable</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Actividad Reciente -->
+            <section class="recent-activity">
+                <div class="section-header">
+                    <h3>Actividad Reciente</h3>
+                    <button class="btn btn-text" id="viewAllActivity">
+                        Ver todo
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
+                </div>
+                <div class="activity-list" id="recentActivityList">
+                    <!-- La actividad se cargará dinámicamente -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/home.js"></script>
+</body>
+</html> 

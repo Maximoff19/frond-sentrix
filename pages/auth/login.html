@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Iniciar sesión en Sentrix - Sistema de Monitoreo de Personal">
+    <title>Iniciar Sesión - Sentrix</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-auth-page="true">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-container">
+                    <img src="../../assets/img/sensinova-logo.svg" alt="SensiNova Logo" class="logo">
+                    <h1>Sentrix</h1>
+                </div>
+                <h2>Iniciar Sesión</h2>
+            </div>
+
+            <form id="loginForm" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        autocomplete="email"
+                        placeholder="ejemplo@empresa.com"
+                    >
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="password-input-container">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required 
+                            autocomplete="current-password"
+                            placeholder="••••••••"
+                        >
+                        <button 
+                            type="button" 
+                            class="toggle-password" 
+                            aria-label="Mostrar/Ocultar contraseña"
+                        >
+                            👁️
+                        </button>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <a href="password-reset.html" class="forgot-password">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Iniciar Sesión
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    ¿No tienes una cuenta? 
+                    <a href="register.html">Regístrate</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+</body>
+</html> 
